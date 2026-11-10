@@ -1,6 +1,6 @@
 # Lab 02 My Answers
 **Student Name:** YOUR NAME HERE
-
+Caiden Haag
 ---
 
 ## How to decode an instruction encoding
@@ -43,63 +43,65 @@ Step 3 — Identify each field:
 **1. `MOVZ X0, #5`**
 
 Hex encoding (from disassembly log): `0x`
-
+d28000a0 
 Binary (32-bit):
 ```
-_    _    _    _    _    _    _    _
-____ ____ ____ ____ ____ ____ ____ ____
+d    2    8    0    0    0    a    0
+1101 0010 1000 0000 0000 0000 1010 0000
 ```
 
 | 31 | 30-29 | 28-23  | 22-21 | 20-5  | 4-0 |
 |----|-------|--------|-------|-------|-----|
 | sf | 10    | 100101 | hw    | imm16 | Rd  |
-|    |       |        |       |       |     |
+| 1  | 10    | 100101 |    00   | 0 0000 0000 0000 101    |00000|
 
-- `sf` =
-- `hw` =
-- `imm16` =
-- `Rd` =
+- `sf` = 1 = 64 bit register
+- `hw` = 10 = no shift
+- `imm16` = 0 0000 0000 0000 101 = 5
+- `Rd` = 00000 = register 0
 
 ---
 
 **2. `ADD X4, X4, X0`**
 
 Hex encoding (from disassembly log): `0x`
-
+8b000084
 Binary (32-bit):
 ```
-_    _    _    _    _    _    _    _
-____ ____ ____ ____ ____ ____ ____ ____
+8    b    0    0    0    0    8    4
+1000 1011 0000 0000 0000 0000 1000 0100
 ```
 
 | 31 | 30 | 29 | 28-24 | 23-22 | 21 | 20-16 | 15-10 | 9-5 | 4-0 |
 |----|----|----|-------|-------|---|-------|-------|-----|-----|
 | sf | op | S  | 01011 | shift | 0  | Rm    | imm6  | Rn  | Rd  |
-|    |    |    |       |       |   |       |       |     |     |
+|   1 |  0  |  0  |    01011   |   00    | 0  |    00000   |  000000     |  00100   |   00100  |
 
-- `Rm` (binary) =
-- `Rn` (binary) =
-- `Rd` (binary) =
+- `Rm` (binary) =  00000
+- `Rn` (binary) =  00100 
+- `Rd` (binary) =  00100
 
 ---
 
 **3. `SUBS X0, X0, X1`**
 
 Hex encoding (from disassembly log): `0x`
-
+eb010000
 Binary (32-bit):
 ```
-_    _    _    _    _    _    _    _
-____ ____ ____ ____ ____ ____ ____ ____
+e    b    0    1    0    0    0    0
+1110 1011 0000 0001 0000 0000 0000 0000
 ```
 
 | 31 | 30 | 29 | 28-24 | 23-22 | 21 | 20-16 | 15-10 | 9-5 | 4-0 |
 |----|----|----|-------|-------|---|-------|-------|-----|-----|
 | sf | op | S  | 01011 | shift | 0  | Rm    | imm6  | Rn  | Rd  |
-|    |    |    |       |       |   |       |       |     |     |
+|   1 | 1   |  1  |   01011  |   00    | 0 |    00010   |   00000    |  00000   |   00000  |
 
 Compare the `op` and `S` bits to `ADD` above:
 - How does the encoding differ to signal that condition flags should be updated?
+
+One is 0 for both Op and S while the other is 1. The 1 indicates that it should be updated.
 
 ---
 
